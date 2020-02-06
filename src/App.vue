@@ -3,7 +3,7 @@
     <img alt="Vue logo" src="./assets/logo.png">
     <HelloWorld msg="Welcome to Your Vue.js App"/>
 
-    <user-profile :user="user"></user-profile>
+    <user-profile :user="user" @save-user="user = $event"></user-profile>
   </div>
 </template>
 
