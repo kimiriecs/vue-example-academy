@@ -2,6 +2,8 @@
   <div id="app">
     <img alt="Vue logo" src="./assets/logo.png">
     <HelloWorld msg="Welcome to Your Vue.js App"/>
+
+    <user-profile></user-profile>
   </div>
 </template>
 
