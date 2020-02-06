@@ -9,11 +9,12 @@
 
 <script>
 import HelloWorld from './components/HelloWorld.vue'
+import UserProfile from "./components/User/Profile";
 
 export default {
   name: 'app',
   components: {
-    HelloWorld
+    HelloWorld, UserProfile
   }
 }
 </script>
