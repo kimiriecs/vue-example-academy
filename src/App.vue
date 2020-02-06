@@ -3,7 +3,7 @@
     <img alt="Vue logo" src="./assets/logo.png">
     <HelloWorld msg="Welcome to Your Vue.js App"/>
 
-    <user-profile></user-profile>
+    <user-profile :user="user"></user-profile>
   </div>
 </template>
 
@@ -15,6 +15,14 @@ export default {
   name: 'app',
   components: {
     HelloWorld, UserProfile
+  },
+  data() {
+    return {
+      user: {
+        name: 'John',
+        surname: 'Doe'
+      }
+    }
   }
 }
 </script>

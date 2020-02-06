@@ -8,13 +8,11 @@
 
 <script>
     export default {
+        props: ['user'],
         name: "Profile",
         data() {
             return {
-                user: {
-                    name: 'John',
-                    surname: 'Doe'
-                }
+
             }
         }
     }
