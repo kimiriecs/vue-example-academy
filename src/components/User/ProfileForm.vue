@@ -16,6 +16,8 @@
 </template>
 
 <script>
+    import {eventBus} from "../../main";
+
     export default {
         props: ['user'],
         name: "ProfileForm",
@@ -30,6 +32,10 @@
                 let name = this.name
                 let surname = this.surname
                 this.$emit('save-user', {name, surname})
+                eventBus.$emit('show-notify', {
+                    'message': 'User saved',
+                    'status': 'success'
+                })
                 this.cancel()
             },
             cancel() {
