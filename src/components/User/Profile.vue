@@ -4,6 +4,9 @@
         <p><strong>Name</strong> {{ user.name }}</p>
         <p><strong>Surname</strong> {{ user.surname }}</p>
 
+        <h3>About Me</h3>
+        <p>{{ user.aboutMe | readMore(100, '...') }}</p>
+
         <div v-if="!showForm">
             <button @click="showForm = !showForm">Edit</button>
         </div>
@@ -34,6 +37,11 @@
         methods: {
             saveUser(user) {
                 this.$emit('save-user', user)
+            }
+        },
+        filters: {
+            readMore(text, length, suffix) {
+                return text.substring(0, length) + suffix;
             }
         }
     }
