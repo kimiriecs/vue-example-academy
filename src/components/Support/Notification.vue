@@ -1,6 +1,6 @@
 <template>
     <div id="notification">
-        <div :style="`background-color: ${color}`">
+        <div v-colored:background="color">
             {{ message || '' }} <button @click="cancel">X</button>
         </div>
     </div>
