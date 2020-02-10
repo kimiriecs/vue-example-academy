@@ -27,6 +27,7 @@
         },
         computed: {
             color() {
+                /* Example how to use console.log() */
                 /* eslint-disable no-console */
                 console.log(this.status);
                 /* eslint-enable no-console */

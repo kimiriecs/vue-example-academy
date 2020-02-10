@@ -9,6 +9,10 @@
             <input type="text" v-model="surname" id="surname">
         </div>
         <div>
+            <label for="about-me">About Me</label>
+            <textarea rows="15" type="text" v-model="aboutMe" id="about-me" style="width: 500px"></textarea>
+        </div>
+        <div>
             <button @click="save">Save</button>
             <button @click="cancel">Cancel</button>
         </div>
@@ -24,14 +28,16 @@
         data() {
             return {
                 name: '',
-                surname: ''
+                surname: '',
+                aboutMe: ''
             }
         },
         methods: {
             save() {
                 let name = this.name
                 let surname = this.surname
-                this.$emit('save-user', {name, surname})
+                let aboutMe = this.aboutMe
+                this.$emit('save-user', {name, surname, aboutMe})
                 eventBus.$emit('show-notify', {
                     'message': 'User saved',
                     'status': 'success'
@@ -45,6 +51,7 @@
         created() {
             this.name = this.user.name
             this.surname = this.user.surname
+            this.aboutMe = this.user.aboutMe
         }
     }
 </script>
