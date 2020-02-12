@@ -1,6 +1,8 @@
 <template>
     <div id="user-profile"> <!--Обязательный корневой элемент-->
         <h1>User Profile {{ id }}</h1>
+
+        <button @click="back">Back</button>
     </div>
 </template>
 
@@ -13,7 +15,9 @@
             }
         },
         methods: {
-
+            back() {
+                this.$router.push('/users')
+            }
         },
         filters: {
             readMore(text, length, suffix) {
