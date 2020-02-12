@@ -1,9 +1,10 @@
 <template>
     <div id="users-list">
         <h1>User Lists</h1>
-
         <ul>
-            <li v-for="user in users" :key="user.id">{{ user.name }}</li>
+            <li v-for="user in users" :key="user.id">
+                <router-link tag="a" :to="`/users/${user.id}`">{{ user.name }}</router-link>
+            </li>
         </ul>
     </div>
 </template>
