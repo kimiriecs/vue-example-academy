@@ -1,5 +1,8 @@
 <template>
     <div id="app">
+        <router-view></router-view> <!--Отображение выбранного компонента-->
+
+
         <div>Hello, {{ user.name | uppercase }}!</div>
         <!--notification-->
         <notification :message="notify.message" :status="notify.status" v-if="showNotify"

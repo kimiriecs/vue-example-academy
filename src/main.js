@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import App from './App.vue'
 import VueRouter from 'vue-router'
+import router from './routes'
 import Colored from './directives/colored'
 
 Vue.config.productionTip = false
@@ -19,4 +20,5 @@ export const eventBus = new Vue()
 
 new Vue({
   render: h => h(App),
+  router
 }).$mount('#app')
