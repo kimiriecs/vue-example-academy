@@ -12,7 +12,7 @@ Vue.use(VueRouter)
 
 // Vue Resource
 Vue.use(VueResource)
-
+Vue.http.options.root = 'https://jsonplaceholder.typicode.com/'
 
 // Filters
 Vue.filter('uppercase', str => str.toUpperCase())

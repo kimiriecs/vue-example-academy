@@ -51,12 +51,13 @@
             return {
                 users: [],
                 user: {name: '', id: null},
-                showCreate: true
+                showCreate: true,
+                resource: null
             }
         },
         methods: {
             getUsers() {
-                this.$http.get('https://jsonplaceholder.typicode.com/users', )
+                this.resource.get({})
                     .then(res => res.json())
                     .then(users => this.users = users)
                     .catch(e => {
@@ -68,7 +69,7 @@
             storeUser() {
                 let user = this.user
 
-                this.$http.post('https://jsonplaceholder.typicode.com/users', user)
+                this.resource.save({}, user)
                     .then(res => res.json())
                     .then(user => {
                         this.users.push(user)
@@ -88,7 +89,7 @@
             updateUser() {
                 let user = this.user
 
-                this.$http.patch('https://jsonplaceholder.typicode.com/users/' + user.id , user)
+                this.resource.update({id: user.id} , user)
                     .then(res => res.json())
                     .then(user => {
                         this.users[user.id - 1] = user
@@ -103,6 +104,8 @@
             }
         },
         created() {
+            this.resource = this.$resource('users{/id}')
+
             this.getUsers()
         }
     }
