@@ -3,11 +3,15 @@ import App from './App.vue'
 import VueRouter from 'vue-router'
 import router from './routes'
 import Colored from './directives/colored'
+import VueResource from 'vue-resource'
 
 Vue.config.productionTip = false
 
 // Vue Router
 Vue.use(VueRouter)
+
+// Vue Resource
+Vue.use(VueResource)
 
 
 // Filters
