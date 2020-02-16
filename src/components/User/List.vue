@@ -3,7 +3,14 @@
         <h1>User Lists</h1>
         <ul>
             <li v-for="user in users" :key="user.id">
-                <router-link tag="a" :to="`/users/${user.id}`"><span :class="{'bg-orange-500': user.id > 10}">{{ user.name }}</span></router-link>
+                <router-link tag="a" :to="`/users/${user.id}`">
+                    <span :class="{'bg-orange-500': user.id > 10}">{{ user.name }}</span>
+                </router-link>
+
+                <button @click="editUser(user)" class="shadow bg-purple-500 hover:bg-purple-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded"
+                        type="button">
+                    Edit
+                </button>
             </li>
         </ul>
 
@@ -16,16 +23,20 @@
                     </label>
                 </div>
                 <div class="md:w-2/3">
-                    <input v-model="name" class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
+                    <input v-model="user.name" class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
                            id="name" type="text">
                 </div>
             </div>
             <div class="md:flex md:items-center">
                 <div class="md:w-1/3"></div>
                 <div class="md:w-2/3">
-                    <button @click="storeUser" class="shadow bg-purple-500 hover:bg-purple-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded"
+                    <button v-if="showCreate" @click="storeUser" class="shadow bg-purple-500 hover:bg-purple-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded"
                             type="button">
                         Create
+                    </button>
+                    <button v-else @click="updateUser" class="shadow bg-purple-500 hover:bg-purple-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded"
+                            type="button">
+                        Update
                     </button>
                 </div>
             </div>
@@ -39,7 +50,8 @@
         data() {
             return {
                 users: [],
-                name: ''
+                user: {name: '', id: null},
+                showCreate: true
             }
         },
         methods: {
@@ -54,13 +66,34 @@
                     })
             },
             storeUser() {
-                let user = {name: this.name}
+                let user = this.user
 
                 this.$http.post('https://jsonplaceholder.typicode.com/users', user)
                     .then(res => res.json())
                     .then(user => {
                         this.users.push(user)
-                        this.name = ''
+                        this.user = {name: '', id: null}
+                    })
+                    .catch(e => {
+                        /* eslint-disable no-console */
+                        console.log(e)
+                        /* eslint-enable no-console */
+                    })
+            },
+            editUser(user) {
+                this.user.name = user.name
+                this.user.id = user.id
+                this.showCreate = false
+            },
+            updateUser() {
+                let user = this.user
+
+                this.$http.patch('https://jsonplaceholder.typicode.com/users/' + user.id , user)
+                    .then(res => res.json())
+                    .then(user => {
+                        this.users[user.id - 1] = user
+                        this.user = {name: '', id: null}
+                        this.showCreate = true
                     })
                     .catch(e => {
                         /* eslint-disable no-console */
